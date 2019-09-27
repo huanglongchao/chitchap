@@ -4,6 +4,7 @@ import (
 	"chitchat/data"
 	"log"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -13,7 +14,7 @@ import (
 
 func RegisterWrap() data.User{
 
-	randStr := string(randNum(100000000,1000000))
+	randStr := strconv.Itoa(randNum(100000000,1000000))
 	user := data.User{
 		Name:     "Robot" + randStr,
 		Email:    randStr + "@qq.com",
