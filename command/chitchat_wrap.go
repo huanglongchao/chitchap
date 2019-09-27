@@ -74,6 +74,7 @@ func CreateThreadWrap() string{
 		}
 		return topic
 	}
+	return ""
 }
 
 
