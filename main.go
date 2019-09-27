@@ -48,6 +48,12 @@ func main() {
 		}
 	}()
 
+	go func() { //
+		for t := range time.Tick(60*time.Second){
+			info(t, ": wrap topic:", command.CreatePostWrap())
+		}
+	}()
+
 	// starting up the server
 	server := &http.Server{
 		Addr:           config.Address,

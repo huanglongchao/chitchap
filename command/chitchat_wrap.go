@@ -78,6 +78,34 @@ func CreateThreadWrap() string{
 }
 
 
+/**
+灌水回复
+*/
+func CreatePostWrap() string{
+	users,err := data.Users()
+	if err != nil {
+		log.Println("wrap: query users fail", err)
+		return ""
+	}
+	rand.Seed(time.Now().Unix())
+	user := users[rand.Intn(len(users))]
+	for _,values := range threadPost{
+		body := values[rand.Intn(len(values))]
+		threads,err := data.Threads()
+		if err != nil{
+			return ""
+		}
+		thread := threads[rand.Intn(len(threads))]
+		if _, err := user.CreatePost(thread, body); err != nil {
+			log.Println("wrap: Cannot create post",err)
+			return ""
+		}
+		return body
+	}
+	return ""
+}
+
+
 func randNum(max,min int) int{
 	rand.Seed(time.Now().Unix())
 	return rand.Intn(max-min)
