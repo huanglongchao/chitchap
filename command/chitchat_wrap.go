@@ -4,6 +4,7 @@ import (
 	"chitchat/data"
 	"log"
 	"math/rand"
+	"time"
 )
 
 /**
@@ -19,11 +20,12 @@ func RegisterWrap() data.User{
 		Password: "944792",
 	}
 	if err := user.Create(); err != nil {
-		log.Fatalln("Cannot generate UUID", err)
+		log.Println("Cannot generate UUID", err)
 	}
 	return user
 }
 
 func randNum(max,min int) int{
+	rand.Seed(time.Now().Unix())
 	return rand.Intn(max-min)
 }
