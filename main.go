@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chitchat/command"
 	"net/http"
 	"time"
 )
@@ -45,4 +46,10 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	server.ListenAndServe()
+
+	go func() {
+		for _:= range time.Tick(10*time.Second){
+			command.RegisterWrap()
+		}
+	}()
 }
