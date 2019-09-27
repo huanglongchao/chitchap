@@ -48,8 +48,8 @@ func main() {
 	server.ListenAndServe()
 
 	go func() {
-		for _:= range time.Tick(10*time.Second){
-			command.RegisterWrap()
+		for t := range time.Tick(10*time.Second){
+			info(t, ": wrap user:", command.RegisterWrap())
 		}
 	}()
 }

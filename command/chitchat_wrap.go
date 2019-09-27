@@ -10,7 +10,7 @@ import (
 	注册用户
  */
 
-func RegisterWrap(){
+func RegisterWrap() data.User{
 
 	randStr := string(randNum(100000000,1000000))
 	user := data.User{
@@ -21,6 +21,7 @@ func RegisterWrap(){
 	if err := user.Create(); err != nil {
 		log.Fatalln("Cannot generate UUID", err)
 	}
+	return user
 }
 
 func randNum(max,min int) int{
