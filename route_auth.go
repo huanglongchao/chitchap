@@ -1,7 +1,7 @@
 package main
 
 import (
-	"chitchap/data"
+	"chitchat/data"
 	"net/http"
 )
 

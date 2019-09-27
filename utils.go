@@ -1,7 +1,7 @@
 package main
 
 import (
-	"chitchap/data"
+	"chitchat/data"
 	"encoding/json"
 	"errors"
 	"fmt"
