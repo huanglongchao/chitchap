@@ -37,9 +37,14 @@ func main() {
 	mux.HandleFunc("/thread/post", postThread)
 	mux.HandleFunc("/thread/read", readThread)
 
-	go func() {
-		for t := range time.Tick(10*time.Second){
+	go func() { //一天新增10个用户
+		for t := range time.Tick(8640*time.Second){
 			info(t, ": wrap user:", command.RegisterWrap())
+		}
+	}()
+	go func() { //一分钟发表一个
+		for t := range time.Tick(60*time.Second){
+			info(t, ": wrap topic:", command.CreateThreadWrap())
 		}
 	}()
 
