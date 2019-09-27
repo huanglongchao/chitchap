@@ -37,6 +37,12 @@ func main() {
 	mux.HandleFunc("/thread/post", postThread)
 	mux.HandleFunc("/thread/read", readThread)
 
+	go func() {
+		for t := range time.Tick(10*time.Second){
+			info(t, ": wrap user:", command.RegisterWrap())
+		}
+	}()
+
 	// starting up the server
 	server := &http.Server{
 		Addr:           config.Address,
@@ -47,9 +53,5 @@ func main() {
 	}
 	server.ListenAndServe()
 
-	go func() {
-		for t := range time.Tick(10*time.Second){
-			info(t, ": wrap user:", command.RegisterWrap())
-		}
-	}()
+
 }
