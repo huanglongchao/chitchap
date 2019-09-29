@@ -1,6 +1,7 @@
 package data
 
 import (
+	"chitchat/meinv"
 	"time"
 )
 
@@ -89,8 +90,8 @@ func (user *User) CreatePost(conv Thread, body string) (post Post, err error) {
 }
 
 // Get all threads in the database and returns it
-func Threads() (threads []Thread, err error) {
-	rows, err := Db.Query("SELECT id, uuid, topic, user_id, created_at FROM threads ORDER BY created_at DESC")
+func Threads(pageNum,pageSize int) (threads []Thread, err error) {
+	rows, err := Db.Query("SELECT id, uuid, topic, user_id, created_at FROM threads ORDER BY created_at DESC limit $1 OFFSET $2",pageSize,(pageNum-1)*pageSize)
 	if err != nil {
 		return
 	}
@@ -118,6 +119,12 @@ func (thread *Thread) User() (user User) {
 	user = User{}
 	Db.QueryRow("SELECT id, uuid, name, email, created_at FROM users WHERE id = $1", thread.UserId).
 		Scan(&user.Id, &user.Uuid, &user.Name, &user.Email, &user.CreatedAt)
+	return
+}
+
+// Get the user mv url
+func (thread *Thread) MvUrl() (url string) {
+	url = meinv.MvUrls[thread.Id%len(meinv.MvUrls)]
 	return
 }
 

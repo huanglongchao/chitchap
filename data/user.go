@@ -135,8 +135,8 @@ func UserDeleteAll() (err error) {
 }
 
 // Get all users in the database and returns it
-func Users() (users []User, err error) {
-	rows, err := Db.Query("SELECT id, uuid, name, email, password, created_at FROM users")
+func Users(pageNum,pageSize int) (users []User, err error) {
+	rows, err := Db.Query("SELECT id, uuid, name, email, password, created_at FROM users ORDER BY created_at DESC limit $1 OFFSET $2",pageSize,(pageNum-1)*pageSize)
 	if err != nil {
 		return
 	}

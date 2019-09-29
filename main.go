@@ -38,18 +38,18 @@ func main() {
 	mux.HandleFunc("/thread/read", readThread)
 
 	go func() { //一天新增10个用户
-		for t := range time.Tick(8640*time.Second){
+		for t := range time.Tick(864*time.Second){
 			info(t, ": wrap user:", command.RegisterWrap())
 		}
 	}()
 	go func() { //一分钟发表一个
-		for t := range time.Tick(60*time.Second){
+		for t := range time.Tick(30*time.Second){
 			info(t, ": wrap topic:", command.CreateThreadWrap())
 		}
 	}()
 
 	go func() { //
-		for t := range time.Tick(60*time.Second){
+		for t := range time.Tick(3*time.Second){
 			info(t, ": wrap topic:", command.CreatePostWrap())
 		}
 	}()
