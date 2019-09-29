@@ -43,13 +43,13 @@ func main() {
 		}
 	}()
 	go func() { //一分钟发表一个
-		for t := range time.Tick(30*time.Second){
+		for t := range time.Tick(300*time.Second){
 			info(t, ": wrap topic:", command.CreateThreadWrap())
 		}
 	}()
 
 	go func() { //
-		for t := range time.Tick(3*time.Second){
+		for t := range time.Tick(100*time.Second){
 			info(t, ": wrap topic:", command.CreatePostWrap())
 		}
 	}()
